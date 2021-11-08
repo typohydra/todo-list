@@ -1,0 +1,132 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126  License: none (public domain)*/html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption, footer, header, hgroup,menu, nav, output, ruby, section, summary,time, mark, audio, video {  margin: 0;  padding: 0;  border: 0;  font-size: 100%;  font: inherit;  vertical-align: baseline;}/* HTML5 display-role reset for older browsers */article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {  display: block;}body {  line-height: 1;}ol, ul {  list-style: none;}blockquote, q {  quotes: none;}blockquote:before, blockquote:after,q:before, q:after {  content: '';  content: none;}table {  border-collapse: collapse;  border-spacing: 0;} *{box-sizing: border-box;}
+
+/*************************
+       MOBILE FIRST
+*************************/
+
+:root {
+    font-size: 16px;
+    --color-accent-red: #e1271c;
+    --color-off-beige: #ede9d9;
+    --color-accent-beige: #c5c0af;
+    --color-accent-gray: #b9bec2;
+    --color-lightbrown: #cab794;
+    --color--off-white: #F8F8FF;
+
+    --header-height: 70px;
+    --nav-weight: 240px;
+    --footer-height: 50px;
+}
+
+html, body {
+    height: 100%;
+}
+
+/************* start of HEADER *************/
+header {
+    background-color: var(--color-accent-gray);
+    position: fixed;
+    height: var(--header-height);
+    width: 100%;
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+header button#mobile-nav-button {
+    background-color: var(--color-accent-red);
+    border:  outset var(--color-accent-red);
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+    color: var(--color-off-beige);
+    font-weight: bold;
+}
+
+header div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+header img#logo {
+    width: 50px;
+    height: 50px;
+}
+
+header h1 {
+    width: 175px;
+    color: var(--color-accent-red);
+    display: inline-block;
+    padding: 5px 0px 0px 10px;
+    font-weight: 10;
+}
+
+/************* start of Note section *************/
+section.main {
+    height: 100vh;
+}
+
+section#right-container {
+    min-height: 100vh;
+    background-color: var(--color--off-white);
+    padding: var(--header-height) 0px 20px 0px;
+}
+
+section#right-container > div { /*placeholder*/
+    width: 80%;
+    height: 50px;
+    background-color: var(--color-accent-gray);
+    margin: 20px auto;
+}
+
+/************* start of NAV *************/
+nav {
+    background-color: var(--color-off-beige);
+    height: 100vh;
+    width: 100vw;
+    padding: var(--header-height) 0px 0px 0px;
+    position: fixed;
+    display: none;
+}
+
+nav #left-container {
+    overflow-y: auto;
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+}
+
+nav #left-container div { /*placeholder*/
+    height: 30px;
+    width: 80%;
+    background-color: var(--color-accent-red);
+    margin:10px auto;
+}
+
+nav > footer {
+    background-color: var(--color-accent-gray);
+    height: var(--footer-height);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+
+/*************************
+       MEDIA DESKTOP
+*************************/
+@media screen and (min-width: 600px) {
+    header button#mobile-nav-button {
+        display: none;
+    }
+
+    section#right-container {
+        padding: var(--header-height) 0px 20px var(--nav-weight);
+    }
+
+    nav {
+        width: var(--nav-weight);
+        display: block !important;
+    }
+}
