@@ -6,6 +6,8 @@ class AllProjects {
     getProjects() { return this.projects;}
 
     addProject(name) {
+        name = name.trim();
+        if (name.length === 0) throw new Error("Project Name Can't Be Empty.")
         this.projects.forEach(project => {
             if( project.getName() === name ) throw new Error("Project Name Already Used.");
         });
@@ -13,6 +15,7 @@ class AllProjects {
     }
 
     removeProject(name) {
+        if (name.length === 0) return;
         for(let i = 0; i < this.projects.length; i++) {
             if(this.projects[i].getName() === name) {
                 this.projects.splice(i, 1);
@@ -32,12 +35,15 @@ class OneProject {
     setName() {}
 
     addNote(name, description) {
+        name = name.trim();
+        if (name.length === 0) throw new Error("Note Name Can't Be Empty.");
         this.notes.forEach(note => {
             if(note.getName() === name ) throw new Error("Note Name Already Used.");
         });
         this.notes.push(new Note(name, description));
     }
     removeNote(name) {
+        if (name.length === 0) return;
         for(let i = 0; i < this.notes.length; i++) {
             if(this.notes[i].getName() === name) {
                 this.notes.splice(i, 1);

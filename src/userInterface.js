@@ -1,3 +1,59 @@
+import {AllProjects, OneProject, Note} from "./todoLogic";
+
+let ALLPROJECTS = new AllProjects();
+
+function addProject() { 
+    const addProjectBtn = document.querySelector('#add-project-btn');
+    const inputProjectNameDiv = document.querySelector('#input-project-name-div');
+    const inputName = document.querySelector('#inputName');
+    const saveBtn = document.querySelector('#save');
+    const discardBtn = document.querySelector('#discard');
+    
+    addProjectBtn.addEventListener('click', () => {
+        inputProjectNameDiv.style.display = "block";
+    })
+
+    saveBtn.addEventListener('click', () => { //create new project
+        try {
+            ALLPROJECTS.addProject(inputName.value);
+            displayProject(inputName.value);
+            inputName.value = "";
+        }
+        catch(exception) { 
+            window.alert(exception);
+        }
+    })
+
+    discardBtn.addEventListener('click', () => {
+        inputProjectNameDiv.style.display = "none";
+    })
+}
+
+function displayProject(name) {
+    const projectDiv = document.createElement('div');
+    projectDiv.classList.add("project");
+
+    const projectNameSpan = document.createElement('span');
+    projectNameSpan.innerText = name;
+    projectNameSpan.title = name; // tootip
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerText = "X";
+    deleteBtn.addEventListener('click', () => {
+        deleteProject(projectDiv, name);
+    })
+    
+    projectDiv.appendChild(projectNameSpan);
+    projectDiv.appendChild(deleteBtn);
+
+    document.querySelector('#left-container').appendChild(projectDiv);
+}
+
+function deleteProject(element, name) {
+    element.remove();
+    ALLPROJECTS.removeProject(name);
+}
+
 const toggleMobileNavMenu = () => {
     const mobileNavBtn = document.querySelector('#mobile-nav-button')
     const mobileNav = document.querySelector('nav')
@@ -14,6 +70,8 @@ const toggleMobileNavMenu = () => {
         }
     })
 };
+
+addProject();
 toggleMobileNavMenu();
 
 export {

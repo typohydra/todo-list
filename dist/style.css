@@ -57,7 +57,7 @@ header img#logo {
 }
 
 header h1 {
-    width: 175px;
+    width: 160px;
     color: var(--color-accent-red);
     display: inline-block;
     padding: 5px 0px 0px 10px;
@@ -97,11 +97,57 @@ nav #left-container {
     height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
-nav #left-container div { /*placeholder*/
+nav #left-container div.add-project-div { 
+    text-align: center;
+    margin: 30px auto;
+}
+
+nav #left-container button#add-project-btn {
     height: 30px;
     width: 80%;
-    background-color: var(--color-accent-red);
-    margin:10px auto;
+    background-color: var(--color-accent-gray);
+}
+
+nav #input-project-name-div {
+    display: none;
+    margin: 5px 0px;
+}
+
+nav #input-project-name-div #inputName {
+    display: block;
+    width: 80%;
+    height: 25px;
+    margin: 5px auto;
+}
+
+nav #left-container div.project {
+    min-height: 30px;
+    width: 80%;
+    margin: 10px auto;
+    padding: 5px;
+    background-color: var(--color-accent-beige);
+    display: flex;
+    align-items: center;
+}
+
+nav #left-container div.project span {
+    display: inline-block;
+    flex-grow: 1;
+    overflow: hidden;
+    margin: 0px 5px 0px 0px;
+}
+
+nav #left-container div.project button {
+    background-color: var(--color-accent-beige);
+    border: none;
+}
+
+nav #left-container div.project button:hover {
+    font-weight: bolder; 
+}
+
+nav #input-project-name-div #save, #discard {
+    background-color: var(--color-accent-gray);
 }
 
 nav > footer {
@@ -111,7 +157,6 @@ nav > footer {
     position: absolute;
     bottom: 0;
 }
-
 
 /*************************
        MEDIA DESKTOP
