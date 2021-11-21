@@ -17,22 +17,31 @@
         <button id="mobile-nav-button">Projects</button>
     </header>
 
-    <section id="main">
-        <nav>
-            <section id="left-container">
-                <div class="add-project-div">
-                    <button id="add-project-btn">Add Project</button>
-                    <div id="input-project-name-div">
-                        <input type="text" id="inputName">
-                        <button id="save">Save</button>
-                        <button id="discard">Discard</button>
-                    </div>
+    <nav>
+        <section id="left-container">
+            <div class="add-project-div">
+                <button id="add-project-btn">Add Project</button>
+                <div id="input-project-name-div">
+                    <input type="text" id="inputName">
+                    <button id="save">Save</button>
+                    <button id="discard">Discard</button>
                 </div>
-            </section>
-            <footer></footer>
-        </nav>
+            </div>
+        </section>
+        <footer></footer>
+    </nav>
 
+    <section id="main">
         <section id="right-container">
+            <h1 id="current-project-name"></h1>
+
+            <div id="add-note-div">
+                <input type="text" id="inputNoteName">
+                <div>
+                    <button id="saveNote">&#10003</button>
+                    <button id="discardNote">X</button>
+                </div>
+            </div>
         </section>
     </section>
 
