@@ -1,9 +1,17 @@
 class AllProjects {
     constructor() {
-        this.projects = [];
+        this.projects = [new OneProject("index")];
     }
 
     getProjects() { return this.projects;}
+
+    getProjectByName(name) { 
+        for(let i = 0; i < this.projects.length; i++) {
+            if( this.projects[i].getName() === name ) {
+                return this.projects[i];
+            };
+        }
+    }
 
     addProject(name) {
         name = name.trim();

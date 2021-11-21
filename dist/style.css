@@ -20,6 +20,7 @@
 
 html, body {
     height: 100%;
+    background-color: var(--color--off-white);
 }
 
 /************* start of HEADER *************/
@@ -75,11 +76,51 @@ section#right-container {
     padding: var(--header-height) 0px 20px 0px;
 }
 
-section#right-container > div { /*placeholder*/
+section#right-container h1 {
+    width: 80%;
+    margin: auto;
+    height: 50px;
+    font-size: 2rem;
+    padding: 20px 0px 0px 0px;
+}
+
+section#right-container #add-note-div {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+section#right-container #add-note-div #inputNoteName {
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+section#right-container #add-note-div > div {
+    margin: 0px 0px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+section#right-container div.note { 
     width: 80%;
     height: 50px;
     background-color: var(--color-accent-gray);
     margin: 20px auto;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+section#right-container div.note > button{
+    background-color: var(--color-accent-gray);
+    border: none;
+}
+section#right-container div.note > button:hover{
+    color: var(--color--off-white);
 }
 
 /************* start of NAV *************/
@@ -167,7 +208,11 @@ nav > footer {
     }
 
     section#right-container {
-        padding: var(--header-height) 0px 20px var(--nav-weight);
+        padding: 0px 0px 20px 0px;
+        position: relative;
+        left: var(--nav-weight);
+        top: var(--header-height);
+        width: calc(100% - var(--nav-weight));
     }
 
     nav {
