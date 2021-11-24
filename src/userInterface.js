@@ -47,15 +47,18 @@ function displayProject(name) {
     const projectNameSpan = document.createElement('span');
     projectNameSpan.innerText = name;
     projectNameSpan.title = name; // tootip
-   
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerText = "X";
-    deleteBtn.addEventListener('click', () => {
-        deleteProject(projectDiv, name);
-    })
-
     projectDiv.appendChild(projectNameSpan);
-    projectDiv.appendChild(deleteBtn);
+    
+    if(name !== "index")
+    {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = "X";
+        deleteBtn.addEventListener('click', () => {
+            deleteProject(projectDiv, name);
+        })
+        projectDiv.appendChild(deleteBtn);
+    }
+
 
     document.querySelector('#left-container').appendChild(projectDiv);
 }
