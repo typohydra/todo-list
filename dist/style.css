@@ -115,6 +115,19 @@ section#right-container div.note {
     justify-content: space-between;
     align-items: center;
 }
+
+section#right-container span.checkNote {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin: 0px 10px 0px 0px;
+    background-color: white;
+}
+
+section#right-container span.checkNote:hover {
+    background-color: var(--color-off-beige);
+}
+
 section#right-container div.note > button{
     background-color: var(--color-accent-gray);
     border: none;
@@ -122,6 +135,8 @@ section#right-container div.note > button{
 section#right-container div.note > button:hover{
     color: var(--color--off-white);
 }
+
+
 
 /************* start of NAV *************/
 nav {

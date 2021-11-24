@@ -96,7 +96,7 @@ function addNote() {
     const saveNoteBtn = document.querySelector('#saveNote');
     const discardNoteBtn = document.querySelector('#discardNote');
 
-    saveNoteBtn.addEventListener('click', function(e) { //create new note
+    saveNoteBtn.addEventListener('click', () => { //create new note
         try {
             ALLPROJECTS.getProjectByName(currentProjectName).addNote(inputNoteName.value, "");
             displayNote(inputNoteName.value);
@@ -105,7 +105,6 @@ function addNote() {
         catch (exception) {
             window.alert(exception);
         }
-        e.stopPropagation();
     })
 
     discardNoteBtn.addEventListener('click', () => {
@@ -114,19 +113,32 @@ function addNote() {
 }
 
 function displayNote(noteName) {
+    let currentNote = ALLPROJECTS.getProjectByName(currentProjectName).getNoteByName(noteName);
+
     const noteDiv = document.createElement('div');
     noteDiv.classList.add("note");
-
+    
     const noteNameSpan = document.createElement('span');
+    noteNameSpan.style.cssText = "margin-right: auto;";
     noteNameSpan.innerText = noteName;
     noteNameSpan.title = noteName; // tootip
-   
+    
+    const checkSpan = document.createElement('span');
+    checkSpan.classList.add('checkNote');
+
+    toggleCheckNote(currentNote, checkSpan, noteNameSpan);
+    checkSpan.addEventListener('click', () => {
+        currentNote.setChecked();
+        toggleCheckNote(currentNote, checkSpan, noteNameSpan);
+    })
+
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = "X";
     deleteBtn.addEventListener('click', () => {
         deleteNote(noteDiv, noteName);
     })
     
+    noteDiv.appendChild(checkSpan);
     noteDiv.appendChild(noteNameSpan);
     noteDiv.appendChild(deleteBtn);
 
@@ -138,6 +150,17 @@ function deleteNote(element, name) {
     ALLPROJECTS.getProjectByName(currentProjectName).removeNote(name);
 }
 
+function toggleCheckNote(note, checkSpan, noteNameSpan) { // check or uncheck
+    if(note.getChecked() === true) {
+        checkSpan.style.cssText = "background-color: #ede9d9;"
+        noteNameSpan.style.cssText = "margin-right: auto; text-decoration: line-through;";
+    }
+    else {
+        checkSpan.style.cssText = "background-color: white;"
+        noteNameSpan.style.cssText = "margin-right: auto;";
+    }
+}
+
 function loadNotes() {
     document.querySelector('#notes-container').innerHTML = ""; // clear page to display new project's notes
 
@@ -146,6 +169,7 @@ function loadNotes() {
         displayNote(note.getName());
     });
 }
+
 
 addProject();
 loadProjects();

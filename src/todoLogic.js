@@ -42,6 +42,14 @@ class OneProject {
     getName() { return this.name; }
     setName() {}
 
+    getNoteByName(noteName) {
+        for(let i = 0; i < this.notes.length; i++) {
+            if( this.notes[i].getName() === noteName ) {
+                return this.notes[i];
+            };
+        }
+    }
+
     addNote(noteName, description) {
         noteName = noteName.trim();
         if (noteName.length === 0) throw new Error("Note Name Can't Be Empty.");
@@ -75,7 +83,7 @@ class Note {
     setDescrition() {}
 
     getChecked() { return this.checked; }
-    setChecked() {}
+    setChecked() { this.checked = !this.checked;}
 }
 
 export {
