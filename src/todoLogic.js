@@ -42,13 +42,13 @@ class OneProject {
     getName() { return this.name; }
     setName() {}
 
-    addNote(name, description) {
-        name = name.trim();
-        if (name.length === 0) throw new Error("Note Name Can't Be Empty.");
+    addNote(noteName, description) {
+        noteName = noteName.trim();
+        if (noteName.length === 0) throw new Error("Note Name Can't Be Empty.");
         this.notes.forEach(note => {
-            if(note.getName() === name ) throw new Error("Note Name Already Used.");
+            if(note.getName() === noteName ) throw new Error("Note Name Already Used.");
         });
-        this.notes.push(new Note(name, description));
+        this.notes.push(new Note(noteName, description));
     }
     removeNote(name) {
         if (name.length === 0) return;

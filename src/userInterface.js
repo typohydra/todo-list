@@ -3,7 +3,9 @@ import { AllProjects, OneProject, Note } from "./todoLogic";
 let ALLPROJECTS = new AllProjects();
 let currentProjectName = "index";
 
-// Projects
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Projects ///////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 function addProject() {
     const addProjectBtn = document.querySelector('#add-project-btn');
     const inputProjectNameDiv = document.querySelector('#input-project-name-div');
@@ -39,7 +41,7 @@ function displayProject(name) {
     projectDiv.addEventListener('click', () => {
         currentProjectName = name; 
         currentProjectNameH1.innerText = currentProjectName;
-        addNote();
+        loadNotes();
     })
     
     const projectNameSpan = document.createElement('span');
@@ -63,6 +65,12 @@ function deleteProject(element, name) {
     ALLPROJECTS.removeProject(name);
 }
 
+function loadProjects() {
+    ALLPROJECTS.getProjects().forEach(project => {
+        displayProject(project.getName());
+    });
+}
+
 const toggleMobileNavMenu = () => {
     const mobileNavBtn = document.querySelector('#mobile-nav-button')
     const mobileNav = document.querySelector('nav')
@@ -80,21 +88,24 @@ const toggleMobileNavMenu = () => {
     })
 };
 
-// Notes
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Notes ///////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 function addNote() {
     const inputNoteName = document.querySelector('#inputNoteName');
     const saveNoteBtn = document.querySelector('#saveNote');
     const discardNoteBtn = document.querySelector('#discardNote');
 
-    saveNoteBtn.addEventListener('click', () => { //create new note
+    saveNoteBtn.addEventListener('click', function(e) { //create new note
         try {
             ALLPROJECTS.getProjectByName(currentProjectName).addNote(inputNoteName.value, "");
             displayNote(inputNoteName.value);
-            inputName.value = "";
+            inputNoteName.value = "";
         }
         catch (exception) {
             window.alert(exception);
         }
+        e.stopPropagation();
     })
 
     discardNoteBtn.addEventListener('click', () => {
@@ -119,7 +130,7 @@ function displayNote(noteName) {
     noteDiv.appendChild(noteNameSpan);
     noteDiv.appendChild(deleteBtn);
 
-    document.querySelector('#right-container').appendChild(noteDiv);
+    document.querySelector('#notes-container').appendChild(noteDiv);
 }
 
 function deleteNote(element, name) {
@@ -127,8 +138,19 @@ function deleteNote(element, name) {
     ALLPROJECTS.getProjectByName(currentProjectName).removeNote(name);
 }
 
+function loadNotes() {
+    document.querySelector('#notes-container').innerHTML = ""; // clear page to display new project's notes
+
+    let project = ALLPROJECTS.getProjectByName(currentProjectName).notes;
+    project.forEach(note => {
+        displayNote(note.getName());
+    });
+}
+
 addProject();
+loadProjects();
 toggleMobileNavMenu();
+addNote();
 
 export {
     toggleMobileNavMenu
