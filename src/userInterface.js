@@ -1,7 +1,33 @@
 import { AllProjects, OneProject, Note } from "./todoLogic";
 
+
 let ALLPROJECTS = new AllProjects();
 let currentProjectName = "index";
+
+function loadLocalStorage() {
+    if(localStorage.length === 0) {
+        ALLPROJECTS.projects.push(new OneProject("index"));
+    }
+    else { // recreate class objects from localStorage
+        let storageAllProjects = JSON.parse(localStorage.getItem("ALLPROJECTS"));
+
+        (storageAllProjects.projects).forEach(project => {
+            ALLPROJECTS.projects.push(new OneProject(project.name));
+
+            (project.notes).forEach(note => {
+                let tempNote = new Note(note.name, "");
+                tempNote.checked = note.checked;
+                ALLPROJECTS.projects[ALLPROJECTS.projects.length - 1].notes.push(tempNote);
+            });
+        });
+    }
+}
+loadLocalStorage();
+loadNotes(); // load index notes as default display
+
+function updateLocalStorage() {
+    localStorage.setItem("ALLPROJECTS", JSON.stringify(ALLPROJECTS));
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Projects ///////////////////////////////////
@@ -22,6 +48,7 @@ function addProject() {
             ALLPROJECTS.addProject(inputName.value);
             displayProject(inputName.value);
             inputName.value = "";
+            updateLocalStorage();
         }
         catch (exception) {
             window.alert(exception);
@@ -34,7 +61,6 @@ function addProject() {
 }
 
 function displayProject(name) {
-    
     const projectDiv = document.createElement('div');
     const currentProjectNameH1 = document.querySelector("#current-project-name");
     projectDiv.classList.add("project");
@@ -53,12 +79,12 @@ function displayProject(name) {
     {
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = "X";
-        deleteBtn.addEventListener('click', () => {
+        deleteBtn.addEventListener('click', (e) => {
             deleteProject(projectDiv, name);
+            e.stopPropagation();
         })
         projectDiv.appendChild(deleteBtn);
     }
-
 
     document.querySelector('#left-container').appendChild(projectDiv);
 }
@@ -66,6 +92,7 @@ function displayProject(name) {
 function deleteProject(element, name) {
     element.remove();
     ALLPROJECTS.removeProject(name);
+    updateLocalStorage();
 }
 
 function loadProjects() {
@@ -104,6 +131,7 @@ function addNote() {
             ALLPROJECTS.getProjectByName(currentProjectName).addNote(inputNoteName.value, "");
             displayNote(inputNoteName.value);
             inputNoteName.value = "";
+            updateLocalStorage();
         }
         catch (exception) {
             window.alert(exception);
@@ -151,6 +179,7 @@ function displayNote(noteName) {
 function deleteNote(element, name) {
     element.remove();
     ALLPROJECTS.getProjectByName(currentProjectName).removeNote(name);
+    updateLocalStorage();
 }
 
 function toggleCheckNote(note, checkSpan, noteNameSpan) { // check or uncheck
@@ -162,6 +191,7 @@ function toggleCheckNote(note, checkSpan, noteNameSpan) { // check or uncheck
         checkSpan.style.cssText = "background-color: white;"
         noteNameSpan.style.cssText = "margin-right: auto;";
     }
+    updateLocalStorage();
 }
 
 function loadNotes() {
@@ -172,7 +202,6 @@ function loadNotes() {
         displayNote(note.getName());
     });
 }
-
 
 addProject();
 loadProjects();

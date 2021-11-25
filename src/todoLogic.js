@@ -1,6 +1,6 @@
 class AllProjects {
     constructor() {
-        this.projects = [new OneProject("index")];
+        this.projects = [];
     }
 
     getProjects() { return this.projects;}
