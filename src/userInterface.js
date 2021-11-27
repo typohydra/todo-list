@@ -1,5 +1,5 @@
 import { AllProjects, OneProject, Note } from "./todoLogic";
-
+import { format } from 'date-fns'
 
 let ALLPROJECTS = new AllProjects();
 let currentProjectName = "index";
@@ -17,6 +17,7 @@ function loadLocalStorage() {
             (project.notes).forEach(note => {
                 let tempNote = new Note(note.name, "");
                 tempNote.checked = note.checked;
+                tempNote.dueDate = note.dueDate;
                 ALLPROJECTS.projects[ALLPROJECTS.projects.length - 1].notes.push(tempNote);
             });
         });
@@ -163,6 +164,33 @@ function displayNote(noteName) {
         toggleCheckNote(currentNote, checkSpan, noteNameSpan);
     })
 
+    //due date
+    const dueDateInput = document.createElement('input');
+    dueDateInput.type = "date";
+    const dueDateSpan = document.createElement('span');
+    dueDateSpan.style.color = "#ede9d9";
+    if(currentNote.dueDate) {
+        dueDateSpan.innerText = currentNote.dueDate;
+        dueDateInput.style.display = "none";
+    }
+    else {
+        dueDateSpan.style.display = "none";
+    }
+
+    dueDateInput.addEventListener('input', (e) => {
+        dueDateSpan.style.display = "inline";
+        dueDateSpan.innerText = format(dueDateInput.valueAsDate, 'MM/dd/yyyy');
+        dueDateInput.style.display = "none";
+        currentNote.dueDate = dueDateSpan.innerText;
+        updateLocalStorage();
+    })
+
+    dueDateSpan.addEventListener('click', () => {
+        dueDateSpan.style.display = "none";
+        dueDateInput.style.display = "inline";
+    })
+
+    //delete
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = "X";
     deleteBtn.addEventListener('click', () => {
@@ -171,6 +199,8 @@ function displayNote(noteName) {
     
     noteDiv.appendChild(checkSpan);
     noteDiv.appendChild(noteNameSpan);
+    noteDiv.appendChild(dueDateInput);
+    noteDiv.appendChild(dueDateSpan);
     noteDiv.appendChild(deleteBtn);
 
     document.querySelector('#notes-container').appendChild(noteDiv);

@@ -74,6 +74,7 @@ class Note {
         this.name = name;
         this.description = description;
         this.checked = false;
+        this.dueDate;
     }
 
     getName() { return this.name; }
