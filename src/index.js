@@ -1,1 +1,5 @@
-import { toggleMobileNavMenu } from "./userInterface";
+import loadLocalStorage from './localStorage';
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadLocalStorage();
+});
