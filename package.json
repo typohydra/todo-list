@@ -23,6 +23,7 @@
     "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
+    "prettier": "2.5.0",
     "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1"
   },

@@ -6,15 +6,27 @@ export default class Note {
     this.dueDate = '';
   }
 
-  getName() { return this.name; }
+  getName() {
+    return this.name;
+  }
 
-  setName(name) { this.name = name; }
+  setName(name) {
+    this.name = name;
+  }
 
-  getDescription() { return this.description; }
+  getDescription() {
+    return this.description;
+  }
 
-  setDescrition(desc) { this.description = desc; }
+  setDescrition(desc) {
+    this.description = desc;
+  }
 
-  getChecked() { return this.checked; }
+  getChecked() {
+    return this.checked;
+  }
 
-  setChecked() { this.checked = !this.checked; }
+  setChecked() {
+    this.checked = !this.checked;
+  }
 }

@@ -5,7 +5,9 @@ export default class AllProjects {
     this.projects = [];
   }
 
-  getProjects() { return this.projects; }
+  getProjects() {
+    return this.projects;
+  }
 
   getProjectByName(name) {
     for (let i = 0; i < this.projects.length; i++) {
@@ -18,9 +20,9 @@ export default class AllProjects {
 
   addProject(name) {
     const projectName = name.trim();
-    if (projectName.length === 0) throw new Error("Project Name Can't Be Empty.");
+    if (projectName.length === 0) { throw new Error("Project Name Can't Be Empty."); }
     this.projects.forEach((project) => {
-      if (project.getName() === projectName) throw new Error('Project Name Already Used.');
+      if (project.getName() === projectName) { throw new Error('Project Name Already Used.'); }
     });
     this.projects.push(new OneProject(projectName));
   }

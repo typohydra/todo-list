@@ -22,7 +22,8 @@ function addProject() {
     inputProjectNameDiv.style.display = 'block';
   });
 
-  saveBtn.addEventListener('click', () => { // create new project
+  saveBtn.addEventListener('click', () => {
+    // create new project
     try {
       ALLPROJECTS.addProject(inputName.value);
       displayProject(inputName.value);
@@ -127,7 +128,8 @@ function displayNote(noteName) {
     toggleCheckNote(currentNote);
   });
 
-  function toggleCheckNote(note) { // check or uncheck
+  function toggleCheckNote(note) {
+    // check or uncheck
     if (note.getChecked() === true) {
       checkSpan.style.cssText = 'background-color: #ede9d9;';
       noteNameSpan.style.cssText = 'margin-right: auto; text-decoration: line-through;';
@@ -184,9 +186,13 @@ function addNote() {
   const saveNoteBtn = document.querySelector('#saveNote');
   const discardNoteBtn = document.querySelector('#discardNote');
 
-  saveNoteBtn.addEventListener('click', () => { // create new note
+  saveNoteBtn.addEventListener('click', () => {
+    // create new note
     try {
-      ALLPROJECTS.getProjectByName(currentProjectName).addNote(inputNoteName.value, '');
+      ALLPROJECTS.getProjectByName(currentProjectName).addNote(
+        inputNoteName.value,
+        '',
+      );
       displayNote(inputNoteName.value);
       inputNoteName.value = '';
       updateLocalStorage();
